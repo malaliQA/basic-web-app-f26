@@ -29,10 +29,13 @@ export default function QueryProcessor(query: string): string {
 
   if (q.includes("square and a cube") || q.includes("square and cube")) {
     // Both a square and a cube means a perfect sixth power.
-    return numbers.filter((n) => n > 0 && Math.round(n ** (1 / 6)) ** 6 === n).join(", ");
+    return numbers.filter((n) => n > 0 && Math.round(n ** (1 / 6)) ** 6 === n).join(",");
   }
 
-  if (q.includes("prime")) return numbers.filter(isPrime).join(", ");
+  if (q.includes("prime") && numbers.length) return numbers.filter(isPrime).join(",");
+
+  const factorial = q.match(/(\d+)\s*factorial|factorial of (\d+)/);
+  if (factorial) return String(factorialOf(Number(factorial[1] ?? factorial[2])));
 
   const fib = q.match(/(\d+)(?:st|nd|rd|th) number in the fibonacci/);
   if (fib) return String(fibonacci(Number(fib[1])));
@@ -58,6 +61,10 @@ function isAnagram(a: string, b: string) {
 function isPrime(n: number) {
   if (!Number.isInteger(n) || n < 2) return false
   return Array.from({ length: Math.floor(Math.sqrt(n)) - 1 }, (_, i) => i + 2).every((d) => n % d !== 0)
+}
+
+function factorialOf(n: number) {
+  return Array.from({ length: n }, (_, i) => i + 1).reduce((product, i) => product * i, 1)
 }
 
 function fibonacci(n: number) {
