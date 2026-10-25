@@ -64,7 +64,7 @@ function isPrime(n: number) {
 }
 
 function factorialOf(n: number) {
-  return Array.from({ length: n }, (_, i) => BigInt(i + 1)).reduce((product, i) => product * i, 1n)
+  return Array.from({ length: n }, (_, i) => BigInt(i + 1)).reduce((product, i) => product * i, BigInt(1))
 }
 
 function fibonacci(n: number) {
