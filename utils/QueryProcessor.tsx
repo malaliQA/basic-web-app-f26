@@ -12,6 +12,9 @@ export default function QueryProcessor(query: string): string {
     if (numbers) return String(Math.max(...numbers.map(Number)));
   }
 
+  const sum = query.match(/(-?\d+(?:\.\d+)?) plus (-?\d+(?:\.\d+)?)/i);
+  if (sum) return String(Number(sum[1]) + Number(sum[2]));
+
   if (query.toLowerCase().includes("andrew id")) {
     return "malali";
   }

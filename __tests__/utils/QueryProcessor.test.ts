@@ -30,6 +30,12 @@ describe("QueryProcessor", () => {
         expect(response).toBe("97");
     });
 
+    test('should add two numbers', () => {
+        const query = "What is 25 plus 97?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("122");
+    });
+
     test('should return name', () => {
         const query = "What is your name?";
         const response: string = QueryProcessor(query);
