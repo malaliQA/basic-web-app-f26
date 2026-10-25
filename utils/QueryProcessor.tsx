@@ -7,6 +7,11 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
+  if (query.toLowerCase().includes("largest")) {
+    const numbers = (query.split(":")[1] ?? "").match(/-?\d+(\.\d+)?/g);
+    if (numbers) return String(Math.max(...numbers.map(Number)));
+  }
+
   if (query.toLowerCase().includes("andrew id")) {
     return "malali";
   }

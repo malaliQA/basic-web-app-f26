@@ -24,6 +24,12 @@ describe("QueryProcessor", () => {
         expect(response).toBe("malali");
     });
 
+    test('should return the largest number', () => {
+        const query = "Which of the following numbers is the largest: 59, 12, 97?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe("97");
+    });
+
     test('should return name', () => {
         const query = "What is your name?";
         const response: string = QueryProcessor(query);
