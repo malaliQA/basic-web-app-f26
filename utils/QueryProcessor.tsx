@@ -64,7 +64,7 @@ function isPrime(n: number) {
 }
 
 function factorialOf(n: number) {
-  return Array.from({ length: n }, (_, i) => i + 1).reduce((product, i) => product * i, 1)
+  return Array.from({ length: n }, (_, i) => BigInt(i + 1)).reduce((product, i) => product * i, 1n)
 }
 
 function fibonacci(n: number) {
@@ -84,6 +84,19 @@ function evaluate(q: string) {
     .replace(/plus/g, "+")
     .replace(/minus/g, "-")
   if (!/^[\d\s+\-*/.()]+$/.test(expression) || !/\d\s*(\*\*|[+\-*/])\s*-?\d/.test(expression)) return undefined
-  const result = Function(`"use strict"; return (${expression})`)()
+  // Integer-only expressions run on BigInt so large results (e.g. powers) print exactly, not as 6.4e+38.
+  if (!/[./]/.test(expression)) {
+    const exact = run(expression.replace(/\d+/g, "$&n"))
+    if (typeof exact === "bigint") return exact
+  }
+  const result = run(expression)
   return typeof result === "number" && Number.isFinite(result) ? result : undefined
+}
+
+function run(expression: string) {
+  try {
+    return Function(`"use strict"; return (${expression})`)()
+  } catch {
+    return undefined
+  }
 }

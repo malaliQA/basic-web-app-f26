@@ -47,6 +47,8 @@ describe("QueryProcessor", () => {
         ["Which of the following numbers is both a square and a cube: 64, 100, 729, 50?", "64,729"],
         ["Which of the following numbers are primes: 3, 4, 5, 9, 11?", "3,5,11"],
         ["Which of the following numbers are primes: 46, 73, 79, 9, 44?", "73,79"],
+        ["What is 46 to the power of 23?", "175158060907268193674686903913845620736"],
+        ["What is 2 to the power of 100?", "1267650600228229401496703205376"],
         ["What is 5 factorial?", "120"],
         ["What is the factorial of 6?", "720"],
         ["What is the 10th number in the Fibonacci sequence?", "55"],
