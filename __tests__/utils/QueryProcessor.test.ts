@@ -53,6 +53,11 @@ describe("QueryProcessor", () => {
         ["What is the factorial of 6?", "720"],
         ["What is the 10th number in the Fibonacci sequence?", "55"],
         ['Which of the following is an anagram of "listen": enlist, google, banana?', "enlist"],
+        ["What is the english scrabble score of zoo?", "12"],
+        ["What is the english scrabble score of banana?", "8"],
+        ["What currency did Spain use before the Euro?", "Peseta"],
+        ["Who played James Bond in the film Dr No?", "Sean Connery"],
+        ["Who is the Prime Minister of Great Britain?", "Keir Starmer"],
         ["What colour is a banana?", "yellow"],
         ["Which city is the Eiffel tower in?", "Paris"],
     ])('should answer "%s"', (query, expected) => {

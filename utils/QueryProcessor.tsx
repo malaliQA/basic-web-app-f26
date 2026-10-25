@@ -43,8 +43,14 @@ export default function QueryProcessor(query: string): string {
   const math = evaluate(q);
   if (math !== undefined) return String(math);
 
+  const scrabble = q.match(/scrabble score of "?([a-z]+)"?/);
+  if (scrabble) return String(scrabbleScore(scrabble[1]));
+
   if (q.includes("banana")) return "yellow";
   if (q.includes("eiffel")) return "Paris";
+  if (q.includes("prime minister")) return "Keir Starmer";
+  if (q.includes("currency") && q.includes("spain")) return "Peseta";
+  if (q.includes("james bond") && q.includes("dr no")) return "Sean Connery";
 
   if (q.includes("name")) return "m";
 
@@ -56,6 +62,11 @@ export default function QueryProcessor(query: string): string {
 function isAnagram(a: string, b: string) {
   const sort = (word: string) => word.toLowerCase().split("").sort().join("")
   return sort(a) === sort(b)
+}
+
+function scrabbleScore(word: string) {
+  const tiles = ["aeioulnrst", "dg", "bcmp", "fhvwy", "k", "", "", "jx", "", "qz"]
+  return word.split("").reduce((score, letter) => score + tiles.findIndex((group) => group.includes(letter)) + 1, 0)
 }
 
 function isPrime(n: number) {
