@@ -36,6 +36,24 @@ describe("QueryProcessor", () => {
         expect(response).toBe("122");
     });
 
+    test.each([
+        ["What is 10 minus 4?", "6"],
+        ["What is 5 multiplied by 12?", "60"],
+        ["What is 12 divided by 4?", "3"],
+        ["What is 2 to the power of 10?", "1024"],
+        ["What is 3 plus 4 plus 5?", "12"],
+        ["What is 3 plus 4 multiplied by 5?", "23"],
+        ["Which of the following numbers is the smallest: 59, 12, 97?", "12"],
+        ["Which of the following numbers is both a square and a cube: 64, 100, 729, 50?", "64, 729"],
+        ["Which of the following numbers are primes: 3, 4, 5, 9, 11?", "3, 5, 11"],
+        ["What is the 10th number in the Fibonacci sequence?", "55"],
+        ['Which of the following is an anagram of "listen": enlist, google, banana?', "enlist"],
+        ["What colour is a banana?", "yellow"],
+        ["Which city is the Eiffel tower in?", "Paris"],
+    ])('should answer "%s"', (query, expected) => {
+        expect(QueryProcessor(query)).toBe(expected);
+    });
+
     test('should return name', () => {
         const query = "What is your name?";
         const response: string = QueryProcessor(query);
